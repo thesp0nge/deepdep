@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deepdep.sh v1.0 - Find deprecated API calls in your Java code.
+# Deepdep.sh - Find deprecated API calls in your Java code.
 #
 # Copyright 2022 Paolo Perego <paolo@codiceinsicuro.it>
 #
@@ -21,7 +21,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
+
+VERSION="1.1"
+APPNAME=`basename $0`
+
 set -o noglob
+set -e
+
+if [ ! -e $1 ]; then
+    echo "$APPNAME: file not found"
+    exit 1
+fi
+
+if [ ! -f $1 ]; then
+    echo "$APPNAME: $1 is not a file"
+    exit 1
+fi
+
 API_FILE="$HOME/api.txt"
 strings=`cat $1 | grep import | cut -f 2 -d ' ' | tr -d ';' `
 
