@@ -38,7 +38,16 @@ if [ ! -f $1 ]; then
     exit 1
 fi
 
-API_FILE="$HOME/api.txt"
+API_DIR_ARRAY=( "./" "$HOME/.deepdep/" "$HOME/" "/usr/share/deepdep/" )
+API_FILENAME="api.txt"
+
+for str in ${API_DIR_ARRAY[@]}; do
+    API_FILE="$str$API_FILENAME"
+    if [ -f $API_FILE ]; then
+        break
+    fi
+done
+
 strings=`cat $1 | grep import | cut -f 2 -d ' ' | tr -d ';' `
 
 for string in $strings;
