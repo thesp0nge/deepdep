@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Deepdep.sh v1.0 - Find deprecated API calls in your Java code.
 #
 # Copyright 2022 Paolo Perego <paolo@codiceinsicuro.it>
