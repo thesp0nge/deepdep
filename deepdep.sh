@@ -28,6 +28,11 @@ APPNAME=`basename $0`
 set -o noglob
 set -e
 
+if [ "$#" -ne 1 ]; then
+    echo "usage: $APPNAME javafile"
+    exit 1
+fi
+
 if [ ! -e $1 ]; then
     echo "$APPNAME: file not found"
     exit 1
@@ -47,6 +52,11 @@ for str in ${API_DIR_ARRAY[@]}; do
         break
     fi
 done
+
+if [ -z $API_FILE ]; then
+    echo "$APPNAME: api.txt file not found"
+    exit
+fi
 
 strings=`cat $1 | grep import | cut -f 2 -d ' ' | tr -d ';' `
 
